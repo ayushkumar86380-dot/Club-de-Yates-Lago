@@ -38,8 +38,9 @@ section{scroll-margin-top:96px}
 .sec-title{font-family:'Gilda Display',serif;color:var(--teal);font-size:clamp(2.2rem,5vw,3rem);margin-top:16px;line-height:1.05;letter-spacing:-.02em}
 .sec-sub{margin-top:24px;color:rgba(23,94,99,.75);font-size:1.125rem;font-weight:300;line-height:1.65}
 
-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.5s;padding:20px 0}
-header.sc{background:rgba(251,253,252,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(221,235,230,.6);padding:12px 0}
+/* HEADER - теперь в потоке, sticky при скролле */
+header{position:sticky;top:0;left:0;right:0;z-index:50;background:rgba(251,253,252,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(221,235,230,.6);padding:20px 0;transition:.3s}
+header.sc{padding:12px 0;background:rgba(251,253,252,.98)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 24px}
 .logo{display:flex;align-items:center;gap:8px}
 .logo b{font-family:'Gilda Display',serif;font-size:clamp(1.25rem,2vw,1.5rem);color:var(--teal);letter-spacing:-.02em;font-weight:400}
@@ -202,7 +203,7 @@ footer{background:var(--teal);color:var(--nieve)}
 </head>
 <body>
 
-<!-- AGE VERIFICATION -->
+<!-- AGE VERIFICATION - ПЕРВЫЙ БЛОК -->
 <section class="age-section" id="ageSection">
   <div class="age-modal">
     <div class="age-flag">
@@ -230,6 +231,7 @@ footer{background:var(--teal);color:var(--nieve)}
   </div>
 </section>
 
+<!-- ШАПКА - СРАЗУ ПОСЛЕ ПЛАШКИ, В ПОТОКЕ -->
 <header id="hd">
   <div class="nav-in">
     <a href="#top" class="logo"><b>Nahuel Huapi</b><span>Club de Yates</span></a>
@@ -558,8 +560,8 @@ footer{background:var(--teal);color:var(--nieve)}
 </footer>
 
 <script>
-// Navbar scroll
-addEventListener('scroll',()=>{document.getElementById('hd').classList.toggle('sc',scrollY>40)});
+// Navbar scroll effect
+addEventListener('scroll',()=>{document.getElementById('hd').classList.toggle('sc',scrollY>100)});
 
 // Mobile menu
 const mmBtn=document.getElementById('mm-btn');
