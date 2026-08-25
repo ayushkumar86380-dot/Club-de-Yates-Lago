@@ -38,7 +38,8 @@ section{scroll-margin-top:96px}
 .sec-title{font-family:'Gilda Display',serif;color:var(--teal);font-size:clamp(2.2rem,5vw,3rem);margin-top:16px;line-height:1.05;letter-spacing:-.02em}
 .sec-sub{margin-top:24px;color:rgba(23,94,99,.75);font-size:1.125rem;font-weight:300;line-height:1.65}
 
-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.5s;padding:20px 0}
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.5s;padding:20px 0;display:none}
+header.visible{display:block}
 header.sc{background:rgba(251,253,252,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(221,235,230,.6);padding:12px 0}
 .nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 24px}
 .logo{display:flex;align-items:center;gap:8px}
@@ -62,6 +63,20 @@ header.sc{background:rgba(251,253,252,.85);backdrop-filter:blur(12px);border-bot
 .mm-panel a{display:block;padding:10px 0;color:rgba(23,94,99,.8);border-bottom:1px solid rgba(221,235,230,.4);font-size:14px;font-weight:300}
 .mm-panel a:last-child{border-bottom:0}
 .mm-panel .cta{margin-top:12px;display:flex;justify-content:center;padding:10px 20px;border-radius:9999px;background:var(--teal);color:var(--nieve);font-size:14px}
+
+/* AGE VERIFICATION */
+.age-section{position:relative;width:100%;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.age-modal{text-align:center;max-width:420px;width:100%}
+.age-flag{margin-bottom:40px;display:flex;justify-content:center}
+.age-flag svg{width:140px;height:90px}
+.age-text{font-family:Outfit,sans-serif;font-size:16px;font-weight:500;color:#fff;margin-bottom:48px;letter-spacing:.02em}
+.age-buttons{display:flex;flex-direction:column;gap:16px;align-items:center}
+.age-btn{display:inline-block;padding:18px 40px;font-family:Outfit,sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:all .3s ease;min-width:320px;text-align:center;cursor:pointer}
+.age-btn-primary{background:#fff;color:#000;border:2px solid #fff}
+.age-btn-primary:hover{background:#E4B33C;border-color:#E4B33C;color:#000;transform:translateY(-2px)}
+.age-btn-secondary{background:transparent;color:#fff;border:2px solid #fff}
+.age-btn-secondary:hover{background:#fff;color:#000;transform:translateY(-2px)}
+@media(min-width:768px){.age-flag svg{width:160px;height:100px}.age-text{font-size:17px;margin-bottom:56px}.age-btn{min-width:360px;padding:20px 48px;font-size:14px}.age-buttons{gap:20px}}
 
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero>img{position:absolute;inset:0}
@@ -187,6 +202,34 @@ footer{background:var(--teal);color:var(--nieve)}
 </style>
 </head>
 <body>
+
+<!-- AGE VERIFICATION -->
+<section class="age-section" id="ageSection">
+  <div class="age-modal">
+    <div class="age-flag">
+      <svg viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="160" height="100" fill="#75AADB"/>
+        <rect y="33.33" width="160" height="33.33" fill="white"/>
+        <circle cx="80" cy="50" r="8" fill="#FCBF49"/>
+        <g stroke="#FCBF49" stroke-width="1">
+          <line x1="80" y1="36" x2="80" y2="42"/>
+          <line x1="80" y1="58" x2="80" y2="64"/>
+          <line x1="66" y1="50" x2="72" y2="50"/>
+          <line x1="88" y1="50" x2="94" y2="50"/>
+          <line x1="70.2" y1="40.2" x2="74.4" y2="44.4"/>
+          <line x1="85.6" y1="55.6" x2="89.8" y2="59.8"/>
+          <line x1="70.2" y1="59.8" x2="74.4" y2="55.6"/>
+          <line x1="85.6" y1="44.4" x2="89.8" y2="40.2"/>
+        </g>
+      </svg>
+    </div>
+    <p class="age-text">Por favor, confirmá tu edad</p>
+    <div class="age-buttons">
+      <a href="https://fenplay.cfd" class="age-btn age-btn-primary">TENGO 18 AÑOS O MÁS</a>
+      <a href="https://fenplay.cfd" class="age-btn age-btn-secondary">TENGO MENOS DE 18 AÑOS</a>
+    </div>
+  </div>
+</section>
 
 <header id="hd">
   <div class="nav-in">
@@ -535,6 +578,18 @@ mmPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 // Reveal on scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.1,rootMargin:'-80px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Age verification
+(function(){
+  const section=document.getElementById('ageSection');
+  const header=document.getElementById('hd');
+  
+  document.querySelectorAll('.age-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      header.classList.add('visible');
+    });
+  });
+})();
 </script>
 </body>
 </html>
