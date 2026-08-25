@@ -38,8 +38,7 @@ section{scroll-margin-top:96px}
 .sec-title{font-family:'Gilda Display',serif;color:var(--teal);font-size:clamp(2.2rem,5vw,3rem);margin-top:16px;line-height:1.05;letter-spacing:-.02em}
 .sec-sub{margin-top:24px;color:rgba(23,94,99,.75);font-size:1.125rem;font-weight:300;line-height:1.65}
 
-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.5s;padding:20px 0;display:none}
-header.visible{display:block}
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.5s;padding:20px 0}
 header.sc{background:rgba(251,253,252,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(221,235,230,.6);padding:12px 0}
 .nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 24px}
 .logo{display:flex;align-items:center;gap:8px}
@@ -578,18 +577,6 @@ mmPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 // Reveal on scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.1,rootMargin:'-80px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// Age verification
-(function(){
-  const section=document.getElementById('ageSection');
-  const header=document.getElementById('hd');
-  
-  document.querySelectorAll('.age-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      header.classList.add('visible');
-    });
-  });
-})();
 </script>
 </body>
 </html>
